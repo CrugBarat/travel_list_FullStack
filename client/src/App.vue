@@ -20,6 +20,7 @@ import BucketList from '@/components/BucketList.vue';
 import CountrySelect from '@/components/CountrySelect';
 import BucketService from '@/services/BucketService';
 import {eventBus} from '@/main.js';
+
 export default {
   name: 'App',
   data() {
@@ -52,8 +53,9 @@ export default {
         BucketService.getBucketList()
         .then(bucketList => this.bucketList = bucketList)
       },
-      addToBucketList(){
-        this.bucketList.push(this.selectedCountry)
+      addToBucketList(event){
+        BucketService.addCountry(this.selectedCountry)
+        .then(country => this.bucketList.push(country));
       }
     }
 }
