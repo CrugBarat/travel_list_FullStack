@@ -26,5 +26,10 @@ export default {
       headers: {'Content-Type': 'application/json'}
     })
     .then(res => res.json())
-  }
+  },
+  deleteAll(){
+    return fetch(baseUrl, {
+      method: 'DELETE'
+    })
+  },
 }

@@ -69,6 +69,10 @@ export default {
     },
     viewList(){
       this.listSelected = true;
+    },
+    clearList(){
+      BucketService.deleteAll()
+      .then(() => this.bucketList = [])
     }
   }
 }
