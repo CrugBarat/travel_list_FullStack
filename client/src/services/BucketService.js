@@ -1,4 +1,4 @@
-const baseUrl = 'http://localhost:3000/api/countries';
+const baseUrl = 'http://localhost:3000/api/countries/';
 
 export default {
 
@@ -7,7 +7,7 @@ export default {
     .then(res => res.json())
   },
   deleteCountry(id){
-    return fetch(baseURL + id, {
+    return fetch(baseUrl + id, {
       method: 'DELETE'
     })
   },
@@ -20,7 +20,7 @@ export default {
     .then(res => res.json());
   },
   updateCountry(id, payload){
-    return fetch(baseURL + id, {
+    return fetch(baseUrl + id, {
       method: 'PUT',
       body: JSON.stringify(payload),
       headers: {'Content-Type': 'application/json'}
