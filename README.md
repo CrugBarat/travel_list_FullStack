@@ -12,8 +12,6 @@ A Travel List app, which uses a HTTP RESTful API as a data source:
 
 **API Client**: Insomnia
 
-**Middleware**: Body Parser
-
 **Markup/Styling**: HTML5/CSS3
 
 The app can add a chosen country to a travel list. The countries and flags are sourced from a REST API. The list is stored in a MongoDb database. The app uses RESTful routes to add and update countries in the Db.  
