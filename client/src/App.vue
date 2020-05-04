@@ -1,17 +1,14 @@
 <template>
   <div id="app">
-    <h2>Travel Bucket List</h2>
-
+    <p class="title">Travel List</p>
     <country-select :countries="countries"/>
-
     <country-detail v-if="selectedCountry" :selectedCountry="selectedCountry">
     </country-detail>
-
-    <button v-if="!bucketList.includes(selectedCountry) && selectedCountry" v-on:click="addToBucketList">Add Country</button>
-
-    <bucket-list :bucketList="bucketList"></bucket-list>
-</div>
-
+    <div class="button-container">
+      <button v-if="!bucketList.includes(selectedCountry) && selectedCountry" v-on:click="addToBucketList">Add Country</button>
+    </div>
+    <bucket-list v-if="countryAdded" :bucketList="bucketList"></bucket-list>
+  </div>
 </template>
 
 <script>
@@ -27,7 +24,8 @@ export default {
     return {
       countries: [],
       selectedCountry: null,
-      bucketList: []
+      bucketList: [],
+      countryAdded: null
     }
   },
   components: {
@@ -35,42 +33,69 @@ export default {
     'bucket-list': BucketList,
     'country-select': CountrySelect
   },
-    mounted(){
-      this.getCountries();
-      this.getBucketList();
+  mounted(){
+    this.getCountries();
+    this.getBucketList();
 
-      eventBus.$on('country-selected', (country) => {
-        this.selectedCountry = country;
-      })
+    eventBus.$on('country-selected', (country) => {
+      this.selectedCountry = country;
+    })
 
-      eventBus.$on('country-updated', (updatedCountry) => {
+    eventBus.$on('country-deleted', (deletedCountry) => {
+      let index = this.bucketList.findIndex(country => country._id === deletedCountry._id)
+      this.bucketList.splice(index, 1)
+    })
+
+    eventBus.$on('country-updated', (updatedCountry) => {
       let index = this.bucketList.findIndex(country => country._id === updatedCountry._id)
       this.bucketList.splice(index, 1, updatedCountry)
     })
+  },
+  methods: {
+    getCountries(){
+      fetch("https://restcountries.eu/rest/v2/all")
+      .then(res => res.json())
+      .then(countries => this.countries = countries)
     },
-    methods: {
-      getCountries(){
-        fetch("https://restcountries.eu/rest/v2/all")
-        .then(res => res.json())
-        .then(countries => this.countries = countries)
-      },
-      getBucketList(){
-        BucketService.getBucketList()
-        .then(bucketList => this.bucketList = bucketList)
-      },
-      addToBucketList(event){
-        BucketService.addCountry(this.selectedCountry)
-        .then(country => this.bucketList.push(country));
-      }
+    getBucketList(){
+      BucketService.getBucketList()
+      .then(bucketList => this.bucketList = bucketList)
+    },
+    addToBucketList(event){
+      BucketService.addCountry(this.selectedCountry)
+      .then(country => this.bucketList.push(country));
+      this.countryAdded = true;
     }
+  }
 }
 </script>
 
-<style>
-.small-flag {
-  height: 20px
+<style lang="css" scoped>
+p{
+  margin: 0;
+  padding: 0;
+}
+.title {
+  font-size: 10vw;
+  text-align: center;
+}
+.button-container {
+  display: block;
+  text-align: center;
 }
 
+</style>
 
-
+<style>
+body {
+  background-image: url('assets/background.jpg');
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+  color: white;
+}
+p {
+  margin: 0;
+  padding: 0;
+}
 </style>

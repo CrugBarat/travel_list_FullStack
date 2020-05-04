@@ -1,10 +1,11 @@
 <template lang="html">
-  <div class="">
-    <label for="country_select">Select a Country:</label>
-    <select id="country_select" v-on:change="countrySelected" v-model="selectedCountry">
-      <option disabled value="">Select a country</option>
-      <option v-for="country in countries" :value="country">{{country.name}}</option>
-    </select>
+  <div class="select-container">
+    <div class="select">
+      <select id="country_select" v-on:change="countrySelected" v-model="selectedCountry">
+        <option disabled>Select A Country</option>
+        <option v-for="country in countries" :value="country">{{country.name}}</option>
+      </select>
+    </div>
   </div>
 </template>
 
@@ -29,4 +30,19 @@ export default {
 </script>
 
 <style lang="css" scoped>
+.select-container {
+  display: block;
+  text-align: center;
+}
+
+.select {
+  margin: 20px;
+}
+
+select {
+  color: white;
+  background-color: transparent;
+  height: 30px;
+  font-size: 20px
+}
 </style>
