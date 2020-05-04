@@ -26,7 +26,6 @@ const createRouter = function (collection) {
     });
   });
 
-
   router.delete('/:id', (req, res) => {
     const id = req.params.id;
     collection.deleteOne({ _id: ObjectID(id)})
@@ -41,7 +40,12 @@ const createRouter = function (collection) {
   router.post('/', (req, res) => {
     const newCountry = req.body;
     collection.insertOne(newCountry)
-    .then(result => res.json(result.ops[0]));
+    .then(result => res.json(result.ops[0]))
+    .catch((err) => {
+      console.error(err);
+      res.status(500);
+      res.json({status: 500, error: err});
+    });
   });
 
   router.put('/:id', (req, res) => {
@@ -50,10 +54,24 @@ const createRouter = function (collection) {
     collection.findOneAndUpdate(
       {_id: ObjectID(id)},
       {$set: updateCountry},
-      {returnOriginal: false}
-    )
+      {returnOriginal: false})
     .then(result => res.json(result.value))
+    .catch((err) => {
+      console.error(err);
+      res.status(500);
+      res.json({status: 500, error: err});
+    });
   });
+
+  router.delete('/', (req, res) => {
+    collection.deleteMany()
+    .then((docs) => res.json(docs))
+    .catch((err) => {
+      console.error(err);
+      res.status(500);
+      res.json({status: 500, error: err});
+    });
+  })
 
   return router;
 

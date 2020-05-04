@@ -6,8 +6,10 @@
     </country-detail>
     <div class="button-container">
       <button v-if="!bucketList.includes(selectedCountry) && selectedCountry" v-on:click="addToBucketList">Add Country</button>
+      <button v-on:click="viewList">View List</button>
+      <button v-on:click="clearList">Clear List</button>
     </div>
-    <bucket-list v-if="countryAdded" :bucketList="bucketList"></bucket-list>
+    <bucket-list v-if="listSelected" :bucketList="bucketList"></bucket-list>
   </div>
 </template>
 
@@ -25,7 +27,7 @@ export default {
       countries: [],
       selectedCountry: null,
       bucketList: [],
-      countryAdded: null
+      listSelected: null
     }
   },
   components: {
@@ -64,7 +66,9 @@ export default {
     addToBucketList(event){
       BucketService.addCountry(this.selectedCountry)
       .then(country => this.bucketList.push(country));
-      this.countryAdded = true;
+    },
+    viewList(){
+      this.listSelected = true;
     }
   }
 }
