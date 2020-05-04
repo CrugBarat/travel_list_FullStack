@@ -14,7 +14,6 @@ MongoClient.connect('mongodb://localhost:27017')
   const countryCollection = db.collection('countries');
   const countryRouter = createRouter(countryCollection);
   app.use('/api/countries', countryRouter);
-
 })
 .catch(console.error);
 
