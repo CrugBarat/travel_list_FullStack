@@ -10,7 +10,6 @@
 </template>
 
 <script>
-
 import {eventBus} from '@/main.js';
 
 export default {
@@ -34,11 +33,9 @@ export default {
   display: block;
   text-align: center;
 }
-
 .select {
   margin: 20px;
 }
-
 select {
   color: white;
   background-color: transparent;
