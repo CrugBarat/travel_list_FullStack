@@ -23,11 +23,10 @@ export default {
 .lrg-flag {
   width: 400px;
   height: 200px;
-  opacity: 80%
+  opacity: 90%
 }
 .country {
   font-size: 35px;
   margin-top: 15px;
 }
-
 </style>

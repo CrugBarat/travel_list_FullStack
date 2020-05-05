@@ -3,8 +3,8 @@
     <p class="title">Country List</p>
     <div class="country-container">
       <div class="country" v-for="country in bucketList">
-        <div class=""><img class="flag" :src="country.flag"/></div>
-        <div v-bind:class="visitedClass(country)">{{country.name}}</div>
+        <div><img v-bind:class="visitedClass(country)" :src="country.flag"/></div>
+        <div>{{country.name}}</div>
         <button v-if="!country.visited" v-on:click="updateList(country)">Visited</button>
         <button v-on:click="deleteCountry(country)">Delete</button>
       </div>
@@ -38,10 +38,15 @@ export default {
 
 <style lang="css" scoped>
 .visited {
-  color: green;
+  width: 130px;
+  height: 65px;
+  opacity: 80%;
+  filter: grayscale(80%);
 }
 .not-visited {
-  color: red;
+  width: 130px;
+  height: 65px;
+  opacity: 100%
 }
 #favourite_countries {
   display: block;
@@ -58,14 +63,10 @@ export default {
   margin: 20px;
   float: left;
 }
-.flag {
-  width: 130px;
-  height: 65px;
-  opacity: 80%
-}
 .title {
   font-size: 60px;
   margin-bottom: 30px;
+  font-family: 'Audiowide', cursive;
 }
 
 </style>

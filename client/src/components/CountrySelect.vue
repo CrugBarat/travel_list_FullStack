@@ -43,6 +43,7 @@ select {
   color: white;
   background-color: transparent;
   height: 30px;
-  font-size: 20px
+  font-size: 20px;
+  font-family: 'Open Sans', sans-serif;
 }
 </style>

@@ -4,8 +4,8 @@
     <country-select :countries="countries"/>
     <country-detail v-if="selectedCountry" :selectedCountry="selectedCountry">
     </country-detail>
-    <div class="button-container">
-      <button v-if="!bucketList.includes(selectedCountry) && selectedCountry" v-on:click="addToBucketList">Add Country</button>
+    <div v-if="countrySelected" class="button-container">
+      <button v-on:click="addToBucketList">Add</button>
       <button v-on:click="viewList">View List</button>
       <button v-on:click="clearList">Clear List</button>
     </div>
@@ -27,7 +27,8 @@ export default {
       countries: [],
       selectedCountry: null,
       bucketList: [],
-      listSelected: null
+      listSelected: null,
+      countrySelected: null
     }
   },
   components: {
@@ -41,6 +42,7 @@ export default {
 
     eventBus.$on('country-selected', (country) => {
       this.selectedCountry = country;
+      this.countrySelected = true;
     })
 
     eventBus.$on('country-deleted', (deletedCountry) => {
@@ -66,13 +68,15 @@ export default {
     addToBucketList(event){
       BucketService.addCountry(this.selectedCountry)
       .then(country => this.bucketList.push(country));
+      this.listSelected = true;
     },
     viewList(){
       this.listSelected = true;
     },
     clearList(){
       BucketService.deleteAll()
-      .then(() => this.bucketList = [])
+      .then(() => this.bucketList = []);
+      this.listSelected = null;
     }
   }
 }
@@ -86,12 +90,12 @@ p{
 .title {
   font-size: 10vw;
   text-align: center;
+  font-family: 'Audiowide', cursive;
 }
 .button-container {
   display: block;
   text-align: center;
 }
-
 </style>
 
 <style>
@@ -101,9 +105,27 @@ body {
   background-attachment: fixed;
   background-position: center;
   color: white;
+  font-family: 'Open Sans', sans-serif;
 }
 p {
   margin: 0;
   padding: 0;
+}
+button {
+  border: solid 3px white;
+  border-radius: 10%;
+  background-color: transparent;
+  color: white;
+  height: 35px;
+  width: 110px;
+  font-size: 20px;
+  margin: 5px;
+  font-family: 'Open Sans', sans-serif;
+}
+button:focus {
+  outline: none;
+}
+button:hover {
+  background-color: red;
 }
 </style>
