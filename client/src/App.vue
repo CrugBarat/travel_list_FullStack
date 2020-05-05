@@ -66,9 +66,9 @@ export default {
       BucketService.getBucketList()
       .then(bucketList => this.bucketList = bucketList)
     },
-    addToBucketList(event){
-      BucketService.addCountry(this.selectedCountry)
-      .then(country => this.bucketList.push(country));
+    addToBucketList(){
+      BucketService.addCountry(this.selectedCountry);
+      this.bucketList.push(this.selectedCountry);
       this.listSelected = true;
       this.toggleButton();
     },
