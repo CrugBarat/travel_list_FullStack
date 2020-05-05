@@ -5,7 +5,7 @@
     <country-detail v-if="selectedCountry" :selectedCountry="selectedCountry">
     </country-detail>
     <div v-if="countrySelected" class="button-container">
-      <button v-on:click="addToBucketList">Add</button>
+      <button v-if="!bucketList.includes(selectedCountry) && selectedCountry" v-on:click="addToBucketList">Add</button>
       <button v-on:click="viewList">{{this.toggle}}</button>
       <button v-on:click="clearList">Clear List</button>
     </div>
@@ -44,17 +44,17 @@ export default {
     eventBus.$on('country-selected', (country) => {
       this.selectedCountry = country;
       this.countrySelected = true;
-    })
+    });
 
     eventBus.$on('country-deleted', (deletedCountry) => {
       let index = this.bucketList.findIndex(country => country._id === deletedCountry._id)
       this.bucketList.splice(index, 1)
-    })
+    });
 
     eventBus.$on('country-updated', (updatedCountry) => {
       let index = this.bucketList.findIndex(country => country._id === updatedCountry._id)
       this.bucketList.splice(index, 1, updatedCountry)
-    })
+    });
   },
   methods: {
     getCountries(){
@@ -70,16 +70,17 @@ export default {
       BucketService.addCountry(this.selectedCountry)
       .then(country => this.bucketList.push(country));
       this.listSelected = true;
+      this.toggleButton();
     },
     viewList(){
       this.listSelected = !this.listSelected;
-      this.toggleButton()
+      this.toggleButton();
     },
     toggleButton(){
       if(this.listSelected){
-        this.toggle = "Hide List"
+        this.toggle = "Hide List";
       } else {
-        this.toggle = "View List"
+        this.toggle = "View List";
       }
     },
     clearList(){

@@ -6,11 +6,13 @@ export default {
     return fetch(baseUrl)
     .then(res => res.json())
   },
+
   deleteCountry(id){
     return fetch(baseUrl + id, {
       method: 'DELETE'
     })
   },
+
   addCountry(payload){
     return fetch(baseUrl, {
       method: 'POST',
@@ -19,6 +21,7 @@ export default {
     })
     .then(res => res.json());
   },
+
   updateCountry(id, payload){
     return fetch(baseUrl + id, {
       method: 'PUT',
@@ -27,9 +30,10 @@ export default {
     })
     .then(res => res.json())
   },
+
   deleteAll(){
     return fetch(baseUrl, {
       method: 'DELETE'
     })
-  },
+  }
 }
