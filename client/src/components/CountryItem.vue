@@ -22,10 +22,10 @@ export default {
     },
     deleteCountry(){
       BucketService.deleteCountry(this.country._id)
-      .then((country) => eventBus.$emit('country-deleted', country))
+      .then(() => eventBus.$emit('country-deleted', this.country._id))
     },
     visitedClass() {
-      return this.country.visited ? "visited" : "not-visited"
+      return this.country.visited ? "visited" : "not-visited";
     }
   }
 }
@@ -47,6 +47,7 @@ export default {
   color: white;
   width: 20.5%;
   margin: 20px;
+  float: left;
 }
 .name {
   font-size: 20px;

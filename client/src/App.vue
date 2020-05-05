@@ -46,8 +46,8 @@ export default {
       this.countrySelected = true;
     });
 
-    eventBus.$on('country-deleted', (deletedCountry) => {
-      let index = this.bucketList.findIndex(country => country._id === deletedCountry._id)
+    eventBus.$on('country-deleted', (id) => {
+      let index = this.bucketList.findIndex(country => country._id === id)
       this.bucketList.splice(index, 1)
     });
 
