@@ -1,3 +1,6 @@
+<img src="https://github.com/CrugBarat/my_files/blob/master/Travel%20List/travel1.png" width="300"> <img src="https://github.com/CrugBarat/my_files/blob/master/Travel%20List/travel2.png" width="300"> <img src="https://github.com/CrugBarat/my_files/blob/master/Travel%20List/travel3.png" width="300">
+
+
 # Travel List
 
 A Travel List app, which uses a HTTP RESTful API as a data source:
@@ -14,7 +17,7 @@ A Travel List app, which uses a HTTP RESTful API as a data source:
 
 **Markup/Styling**: HTML5/CSS3
 
-The app can add a chosen country to a travel list. The countries and flags are sourced from a REST API. The list is stored in a MongoDb database. The app uses RESTful routes to add and update countries in the Db.  
+The app can add a chosen country to a travel list. The countries and flags are sourced from a REST API. The list is stored in a MongoDb database. The app uses RESTful routes to add, delete and update countries in the Db.  
 
 This exercise was tasked to me by CodeClan, Glasgow where I studied towards a PDA Level 8 in Professional Software Development. The exercise brief can be found below.
 
