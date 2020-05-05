@@ -6,7 +6,7 @@
     </country-detail>
     <div v-if="countrySelected" class="button-container">
       <button v-on:click="addToBucketList">Add</button>
-      <button v-on:click="viewList">View List</button>
+      <button v-on:click="viewList">{{this.toggle}}</button>
       <button v-on:click="clearList">Clear List</button>
     </div>
     <bucket-list v-if="listSelected" :bucketList="bucketList"></bucket-list>
@@ -28,7 +28,8 @@ export default {
       selectedCountry: null,
       bucketList: [],
       listSelected: null,
-      countrySelected: null
+      countrySelected: null,
+      toggle: "View List"
     }
   },
   components: {
@@ -71,7 +72,15 @@ export default {
       this.listSelected = true;
     },
     viewList(){
-      this.listSelected = true;
+      this.listSelected = !this.listSelected;
+      this.toggleButton()
+    },
+    toggleButton(){
+      if(this.listSelected){
+        this.toggle = "Hide List"
+      } else {
+        this.toggle = "View List"
+      }
     },
     clearList(){
       BucketService.deleteAll()
@@ -91,6 +100,7 @@ p{
   font-size: 10vw;
   text-align: center;
   font-family: 'Audiowide', cursive;
+  text-shadow: -1px -1px 0 red, 1px -1px 0 red, -1px 1px 0 red, 1px 1px 0 red;
 }
 .button-container {
   display: block;
@@ -117,7 +127,7 @@ button {
   background-color: transparent;
   color: white;
   height: 35px;
-  width: 110px;
+  width: 120px;
   font-size: 20px;
   margin: 5px;
   font-family: 'Open Sans', sans-serif;
