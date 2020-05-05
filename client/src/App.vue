@@ -5,7 +5,7 @@
     <country-detail v-if="selectedCountry" :selectedCountry="selectedCountry">
     </country-detail>
     <div v-if="countrySelected" class="button-container">
-      <button v-if="!bucketList.includes(selectedCountry) && selectedCountry" v-on:click="addToBucketList">Add</button>
+      <button v-if="selectedCountry && !bucketList.some(country => country.name === selectedCountry.name)" v-on:click="addToBucketList">Add</button>
       <button v-on:click="viewList">{{this.toggle}}</button>
       <button v-on:click="clearList">Clear List</button>
     </div>
@@ -67,8 +67,8 @@ export default {
       .then(bucketList => this.bucketList = bucketList)
     },
     addToBucketList(){
-      BucketService.addCountry(this.selectedCountry);
-      this.bucketList.push(this.selectedCountry);
+      BucketService.addCountry(this.selectedCountry)
+      .then(country => this.bucketList.push(country));
       this.listSelected = true;
       this.toggleButton();
     },
