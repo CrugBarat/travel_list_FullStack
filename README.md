@@ -3,7 +3,7 @@
 
 # Travel List
 
-A Travel List app, which uses a HTTP RESTful API as a data source:
+A full stack Travel List app, which uses a HTTP RESTful API as a data source:
 
 **Programming Language**: JavaScript
 
